@@ -87,14 +87,71 @@ public class LinkedListImpl {
         if(length ==0)
             return -1;
         if(length == 1) {
+            Node temp = head;
             head = null;
             tail = null;
+            length--;
+            return temp.value;
         }
         Node temp = head;
         head = temp.next;
         length--;
         return temp.value;
     }
+
+    public int get(int i) {
+        Node temp = head;
+        int index = 0;
+        if(length == 0 || i >= length)
+            return -1;
+        if(i == 0){
+            return temp.value;
+        } else {
+            while (index < i){
+                temp = temp.next;
+                index++;
+            }
+            return temp.value;
+        }
+    }
+
+    public boolean set(int i, int value) {
+        if(length == 0 || i >= length)
+            return false;
+
+        Node temp = head;
+        for(int index = 0; index < i; index++){
+            temp = temp.next;
+        }
+        if(temp != null){
+            temp.value = value;
+            return true;
+        } else
+            return false;
+    }
+
+    public boolean insert(int index, int value) {
+        if(index > length || index < 0)
+            return false;
+        Node newNode = new Node(value);
+        Node temp = head;
+        if(index ==0) {
+            prepend(value);
+            return true;
+        }
+        if(index == length) {
+            append(value);
+            return true;
+        }
+        for(int i=0; i< index-1; i++) {
+            temp = temp.next;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+        length++;
+        return true;
+    }
+
     static class Node {
         int value;
         Node next;
