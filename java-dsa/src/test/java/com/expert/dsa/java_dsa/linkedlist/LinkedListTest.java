@@ -82,4 +82,53 @@ public class LinkedListTest {
 
         linkedList.printLinkedList();
     }
+
+    @Test
+    public void testRemove(){
+        LinkedListImpl linkedList = new LinkedListImpl(1);
+        linkedList.append(2);
+        linkedList.append(3);
+        linkedList.append(4);
+        linkedList.printLinkedList();
+
+        Assertions.assertEquals(null, linkedList.remove(-1));
+        Assertions.assertNull(linkedList.remove(100));
+
+        Assertions.assertEquals(1, linkedList.remove(0).value);
+        Assertions.assertEquals(3, linkedList.length());
+
+        linkedList.printLinkedList();
+
+        linkedList.prepend(1);
+
+        Assertions.assertEquals(4, linkedList.remove(3).value);
+
+        linkedList.append(4);
+
+        linkedList.printLinkedList();
+
+        Assertions.assertEquals(3, linkedList.remove(2).value);
+        Assertions.assertEquals(4, linkedList.remove(2).value);
+        linkedList.printLinkedList();
+        Assertions.assertEquals(1, linkedList.remove(0).value);
+        Assertions.assertEquals(2, linkedList.remove(0).value);
+    }
+
+    @Test
+    public void testReverse(){
+        LinkedListImpl linkedList = new LinkedListImpl(1);
+        linkedList.append(2);
+        linkedList.append(3);
+        linkedList.append(4);
+
+        linkedList.printLinkedList();
+
+        linkedList.reverse();
+
+        linkedList.printLinkedList();
+
+        Assertions.assertEquals(4, linkedList.get(0));
+        Assertions.assertEquals(1, linkedList.get(3));
+
+    }
 }

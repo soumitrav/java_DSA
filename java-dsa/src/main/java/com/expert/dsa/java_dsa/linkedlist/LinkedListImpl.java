@@ -152,6 +152,61 @@ public class LinkedListImpl {
         return true;
     }
 
+    public Node remove(int index) {
+
+        if(index < 0 || index >= length) return null;
+        if(index == 0) {
+            Node temp = head;
+            head = temp.next;
+            temp.next = null;
+            length--;
+            return temp;
+        }
+
+        if(index == length -1){
+            Node pre = head;
+            Node temp = head;
+
+            while(null != temp.next) {
+                pre = temp;
+                temp = temp.next;
+            }
+            tail = pre;
+            tail.next = null;
+            length--;
+            if(length == 0) {
+                head = null;
+                tail = null;
+            }
+            return temp;
+        }
+
+        Node temp = head;
+        Node pre = head;
+        for(int i =0 ;i < index ; i++){
+            pre = temp;
+            temp = temp.next;
+        }
+
+        pre.next = temp.next;
+        length--;
+        return temp;
+    }
+
+    public void reverse(){
+        Node temp = head;
+        head = tail;
+        tail = temp;
+//1, 2, 3, 4
+        Node before = null;
+        //Node after = temp.next;
+        for (int i=0;i < length ; i++) {
+             Node after = temp.next;
+             temp.next = before;
+             before = temp;
+             temp = after;
+        }
+    }
     static class Node {
         int value;
         Node next;
